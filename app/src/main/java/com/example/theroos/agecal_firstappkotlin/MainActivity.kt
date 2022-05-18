@@ -1,5 +1,6 @@
 package com.example.theroos.agecal_firstappkotlin
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,7 +10,7 @@ import java.sql.RowId
 import java.text.FieldPosition
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,12 +37,20 @@ class MainActivity : AppCompatActivity() {
 
 
         val enter_month = findViewById<Spinner>(R.id.enter_month_spinner)
-        enter_month.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView:  AdapterView<*>?, view: View?,position: Int,id: Long) {
-                Toast.makeText(this@MainActivity,"You have selected ${adapterView?.getItemAtPosition(position).toString()}",Toast.LENGTH_LONG).show()
+        val months = resources.getStringArray(R.array.Months)
+        if(enter_month != null){
+            val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,months)
+            enter_month.adapter = adapter
+        }
+        enter_month.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, p3: Long) {
+                Toast.makeText(this@MainActivity, "You have selected" + " " + "" + months[position], Toast.LENGTH_SHORT).show()
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
+
             }
+
         }
 
 
@@ -65,5 +74,13 @@ class MainActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }
