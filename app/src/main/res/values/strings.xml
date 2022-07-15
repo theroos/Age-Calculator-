@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AgeCal_FirstappKotlin</string>
+    <string name="selected_item">Selected item:</string>
     <string-array name="Months">
         <item>Jan</item>
         <item>Feb</item>

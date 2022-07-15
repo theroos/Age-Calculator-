@@ -36,21 +36,23 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
 
 
-        val enter_month = findViewById<Spinner>(R.id.enter_month_spinner)
         val months = resources.getStringArray(R.array.Months)
+        val enter_month = findViewById<Spinner>(R.id.enter_month_spinner)
+
         if(enter_month != null){
-            val adapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,months)
+            val adapter = ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,months)
             enter_month.adapter = adapter
-        }
-        enter_month.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, p3: Long) {
-                Toast.makeText(this@MainActivity, "You have selected" + " " + "" + months[position], Toast.LENGTH_SHORT).show()
+
+            enter_month.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, p3: Long) {
+                    Toast.makeText(this@MainActivity,getString(R.string.selected_item) + " " + "" + months[position], Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
             }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-
         }
 
 
